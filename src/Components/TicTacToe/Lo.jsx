@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import './Lo.css'
 import * as XLSX from 'xlsx' // Import SheetJS library
 import { DataContext } from './LandingPage'
@@ -188,9 +188,16 @@ const patterns = [
     missingIndex: 3,
     points: 5,
   },
-] 
+]
 
 const Lo = () => {
+  const webgazer = window.webgazer
+
+  useEffect(() => {
+    webgazer.showPredictionPoints(false)
+    console.log('resssff')
+    webgazer.pause()
+  })
   const {
     score,
     setScore,
@@ -200,7 +207,7 @@ const Lo = () => {
     completionTimes,
     setCompletionTimes,
   } = useContext(DataContext)
-  
+
   const [startTime, setStartTime] = useState(Date.now())
   const [feedbackIcons, setFeedbackIcons] = useState({})
   const [selectedOptions, setSelectedOptions] = useState({})
@@ -243,7 +250,7 @@ const Lo = () => {
 
     XLSX.writeFile(workbook, 'LogicResults.xlsx')
   }
-  
+
   return (
     <div className="logic-game">
       <h1>Logic Patterns</h1>

@@ -44,25 +44,23 @@ function MemoryGame() {
       { id: 7, img: '/img/angular.png', stat: '' },
       { id: 8, img: '/img/nodejs.png', stat: '' },
       { id: 8, img: '/img/nodejs.png', stat: '' },*/
-      [
-        { id: 1, img: '/img/apple.png', stat: '' },
-        { id: 1, img: '/img/apple.png', stat: '' },
-        { id: 2, img: '/img/carret.png', stat: '' },
-        { id: 2, img: '/img/carret.png', stat: '' },
-        { id: 3, img: '/img/flower.png', stat: '' },
-        { id: 3, img: '/img/flower.png', stat: '' },
-        { id: 4, img: '/img/graps.png', stat: '' },
-        { id: 4, img: '/img/graps.png', stat: '' },
-        { id: 5, img: '/img/leamon.png', stat: '' },
-        { id: 5, img: '/img/leamon.png', stat: '' },
-        { id: 6, img: '/img/pinapple.png', stat: '' },
-        { id: 6, img: '/img/pinapple.png', stat: '' },
-        { id: 7, img: '/img/strabery.png', stat: '' },
-        { id: 7, img: '/img/strabery.png', stat: '' },
-        { id: 8, img: '/img/toffe.png', stat: '' },
-        { id: 8, img: '/img/toffe.png', stat: '' },
-
-
+    [
+      { id: 1, img: '/img/apple.png', stat: '' },
+      { id: 1, img: '/img/apple.png', stat: '' },
+      { id: 2, img: '/img/carret.png', stat: '' },
+      { id: 2, img: '/img/carret.png', stat: '' },
+      { id: 3, img: '/img/flower.png', stat: '' },
+      { id: 3, img: '/img/flower.png', stat: '' },
+      { id: 4, img: '/img/graps.png', stat: '' },
+      { id: 4, img: '/img/graps.png', stat: '' },
+      { id: 5, img: '/img/leamon.png', stat: '' },
+      { id: 5, img: '/img/leamon.png', stat: '' },
+      { id: 6, img: '/img/pinapple.png', stat: '' },
+      { id: 6, img: '/img/pinapple.png', stat: '' },
+      { id: 7, img: '/img/strabery.png', stat: '' },
+      { id: 7, img: '/img/strabery.png', stat: '' },
+      { id: 8, img: '/img/toffe.png', stat: '' },
+      { id: 8, img: '/img/toffe.png', stat: '' },
     ].sort(() => Math.random() - 0.5)
   )
 

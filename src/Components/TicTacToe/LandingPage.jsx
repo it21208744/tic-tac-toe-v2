@@ -6,7 +6,6 @@ export const DataContext = createContext(null)
 const LandingPage = () => {
   const [isVideoOn, setIsVideoOn] = useState(false)
   const [gazeDataCollection, setGazeDataCollection] = useState([])
-  const webgazer = window.webgazer
 
   //memory card
   const [accuracy, setAccuracy] = useState(0)
@@ -31,25 +30,23 @@ const LandingPage = () => {
   const [fixationDuration, setFixationDuration] = useState([])
 
   useEffect(() => {
-    const listener = (data, elapsedTime) => {
-      if (data) {
-        setGazeDataCollection((prev) => [
-          ...prev,
-          { x: data.x, y: data.y, time: elapsedTime / 1000 },
-        ])
-      }
-    }
-
-    webgazer
-      .setGazeListener(listener)
-      .setRegression('ridge') // 'weightedRidge' 'threadedRidge'
-      .showVideo(false)
-      .begin()
-      .then(() => console.log('WebGazer initialized'))
-
-    return () => {
-      webgazer.clearGazeListener()
-    }
+    // const listener = (data, elapsedTime) => {
+    //   if (data) {
+    //     setGazeDataCollection((prev) => [
+    //       ...prev,
+    //       { x: data.x, y: data.y, time: elapsedTime / 1000 },
+    //     ])
+    //   }
+    // }
+    // webgazer
+    //   .setGazeListener(listener)
+    //   .setRegression('ridge') // 'weightedRidge' 'threadedRidge'
+    //   .showVideo(false)
+    //   .begin()
+    //   .then(() => console.log('WebGazer initialized'))
+    // return () => {
+    //   webgazer.clearGazeListener()
+    // }
   }, [])
 
   return (

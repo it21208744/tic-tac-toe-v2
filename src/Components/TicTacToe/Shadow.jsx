@@ -207,11 +207,31 @@ const ShadowGame = () => {
   } = useContext(DataContext)
   const navigate = useNavigate()
   const [currentPattern, setCurrentPattern] = useState(0)
-
   const [feed, setFeed] = useState('')
   const [isDisabled, setIsDisabled] = useState(false)
 
   useEffect(() => {
+    const listener = (data, elapsedTime) => {
+      if (data) {
+        setGazeDataCollection((prev) => [
+          ...prev,
+          { x: data.x, y: data.y, time: elapsedTime / 1000 },
+        ])
+      }
+    }
+
+    webgazer
+      .setGazeListener(listener)
+      .setRegression('ridge') // 'weightedRidge' 'threadedRidge'
+      .showVideo(false)
+    webgazer
+      .showPredictionPoints(true)
+      .begin()
+      .then(() => console.log('WebGazer initialized'))
+
+    return () => {
+      webgazer.clearGazeListener()
+    }
     setGazeDataCollection([])
     const timer = setInterval(() => {
       setTimeElapsed((prev) => prev + 1)
@@ -233,12 +253,16 @@ const ShadowGame = () => {
       if (currentPattern < patterns.length - 1) {
         setCurrentPattern((prev) => prev + 1)
       } else {
-        // navigate('/logicThinking')
-        alert(`Game over! Final Score: ${shadowScore}`)
-        setGazeShiftsCount(countTimesOutsideArea(gazeDataCollection))
-        setFixationDuration(timeToFirstGaze(gazeDataCollection / 1000))
+        // End game after answering 10 questions
+        endGame()
       }
     }, 1500)
+  }
+
+  const endGame = () => {
+    alert(`Game over! Final Score: ${shadowScore}`)
+    setGazeShiftsCount(countTimesOutsideArea(gazeDataCollection))
+    setFixationDuration(timeToFirstGaze(gazeDataCollection) / 1000)
   }
 
   const handleSubmit = () => {
@@ -268,24 +292,18 @@ const ShadowGame = () => {
         <h1>Shadow Matching Game</h1>
       </div>
       <div className="ab">
-      <div>Score: {shadowScore}</div>
+        <div>Score: {shadowScore}</div>
         <div>Time Elapsed: {timeElapsed} seconds</div>
-        </div>
-
+      </div>
 
       {feed && <div className="feed">{feed}</div>}
-         {/* Display Original Image Above the Grid */}
-         <div className="original-container">
-          <img
-            src={original}
-            alt="Original Object"
-            className="original-image"
-          />
-        </div>
+
+      {/* Display Original Image Above the Grid */}
+      <div className="original-container">
+        <img src={original} alt="Original Object" className="original-image" />
+      </div>
       <div className="game-container">
         <div className="game-area">
-        
-       
           <div className="shadow-grid">
             {shadows.map((shadow, index) => (
               <button
