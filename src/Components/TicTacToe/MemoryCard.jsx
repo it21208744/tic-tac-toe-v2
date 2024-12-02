@@ -76,11 +76,15 @@ function MemoryGame() {
   const audioRef = useRef(new Audio(memorySound))
   const finishBellRef = useRef(new Audio(finishBellSound))
   const [elapsedTime, setElapsedTime] = useState(0) // Time in seconds
+  const webgazer = window.webgazer
 
   const { accuracy, setAccuracy, memoryScore, setMemoryScore, formatTime } =
     useContext(DataContext)
 
   useEffect(() => {
+    webgazer.showPredictionPoints(false)
+
+    webgazer.pause()
     const timer = setInterval(() => {
       setElapsedTime((prev) => prev + 1) // Increment every second
     }, 1000)
